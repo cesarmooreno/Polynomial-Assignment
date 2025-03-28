@@ -97,6 +97,9 @@ class Node:
 
 
 class LinkedList:
+    """"
+    xsd
+    """
     def __init__(self):
         # You are also welcome to use a sentinel/dummy node!
         # It is definitely recommended, which will we learn more
@@ -112,16 +115,19 @@ class LinkedList:
     # If a term with that exponent already exists, add the coefficients together.
     # You must keep the terms in descending order by exponent.
     def insert_term(self, coeff, exp):
+        """
+        Insert_term function
+        """
         if coeff == 0:
             pass
-        elif self.head == None:
+        elif self.head is None:
             self.head = Node(coeff, exp)
         elif exp > self.head.exp:
             self.head = Node(coeff, exp, link = self.head)
         elif exp < self.head.exp:
             curr = self.head
             while curr:
-                if curr.next == None:
+                if curr.next is None:
                     curr.next = Node(coeff,exp)
                     break
                 if curr.next.exp > exp:
@@ -140,32 +146,38 @@ class LinkedList:
 
     # Add a polynomial p to the polynomial and return the resulting polynomial as a new linked list.
     def add(self, p):
-        newPoly = LinkedList()
+        """
+        add function
+        """
+        new_poly = LinkedList()
         curr1 = self.head
         curr2 = p.head
         while curr1 or curr2:
-            if curr1 == None:
-                newPoly.insert_term(curr2.coeff, curr2.exp)
+            if curr1 is None:
+                new_poly.insert_term(curr2.coeff, curr2.exp)
                 curr2 = curr2.next
-            elif curr2 == None:
-                newPoly.insert_term(curr1.coeff, curr1.exp)
+            elif curr2 is None:
+                new_poly.insert_term(curr1.coeff, curr1.exp)
                 curr1 = curr1.next
             elif curr1.exp > curr2.exp:
-                newPoly.insert_term(curr1.coeff, curr1.exp)
+                new_poly.insert_term(curr1.coeff, curr1.exp)
                 curr1 = curr1.next
             elif curr1.exp < curr2.exp:
-                newPoly.insert_term(curr2.coeff, curr2.exp)
+                new_poly.insert_term(curr2.coeff, curr2.exp)
                 curr2 = curr2.next
             else:
                 total = curr1.coeff + curr2.coeff
                 if total != 0:
-                    newPoly.insert_term(total, curr1.exp)
+                    new_poly.insert_term(total, curr1.exp)
                 curr1 = curr1.next
                 curr2 = curr2.next
-        return newPoly
+        return new_poly
 
     # Multiply a polynomial p with the polynomial and return the product as a new linked list.
     def mult(self, p):
+        """
+        Mult function
+        """
         curr_p1 = self.head
         curr_p2 = p.head
 
@@ -176,10 +188,9 @@ class LinkedList:
             while curr_p2:
                 new_p.insert_term(curr_p1.coeff * curr_p2.coeff, curr_p1.exp + curr_p2.exp)
                 curr_p2 = curr_p2.next
-            curr_p1=curr_p1.next    
+            curr_p1=curr_p1.next
             curr_p2 = p.head
 
-        
         return new_p
 
     # Return a string representation of the polynomial.
@@ -192,37 +203,20 @@ class LinkedList:
             current = current.next
         # nodes_str.append("None")
         return " + ".join(nodes_str)
-    
-# l = LinkedList()
-# l.insert_term(3,5)
-# l.insert_term(2,1)
-# l.insert_term(4,1)
-# print(l)
-
-poly1 = LinkedList()
-poly1.insert_term(3, 2)  # 3x^2
-poly1.insert_term(2, 1)  # 2x
-poly1.insert_term(1, 0)  # 1
-
-poly2 = LinkedList()
-poly2.insert_term(1, 1)  # x
-poly2.insert_term(2, 0)  # 2
 
 
-# print(poly1)
-
-# print(poly2)
-
-# print(poly1.mult(poly2))
 
 def main():
+    """
+    Main function
+    """
     # read data from stdin (terminal/file) using input() and create polynomial p
     first_call = int(input())
     p1 = LinkedList()
     for _ in range(first_call):
         coeff, exp = input().split()
         p1.insert_term(int(coeff), int(exp))
-    
+
     second_call= int(input())
     p2 = LinkedList()
     for _ in range(second_call):
@@ -240,8 +234,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-# s = "4 8"
-# r,w = s.split()
-
-# print(r)
-# print(w)
