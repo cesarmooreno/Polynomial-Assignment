@@ -216,7 +216,7 @@ def main():
     for _ in range(first_call):
         coeff, exp = input().split()
         p1.insert_term(int(coeff), int(exp))
-
+    blank = input()
     second_call= int(input())
     p2 = LinkedList()
     for _ in range(second_call):
